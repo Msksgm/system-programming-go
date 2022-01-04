@@ -1,6 +1,7 @@
 package main
 
 import (
+	"compress/gzip"
 	"io"
 	"os"
 )
@@ -10,6 +11,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	writer := io.MultiWriter(file, os.Stdout)
-	io.WriteString(writer, "io.MultiWriter example\n")
+	writer := gzip.NewWriter(file)
+	writer.Header.Name = "text.txt"
+	io.WriteString(writer, "gzip.Writer example\n")
+	writer.Close()
 }
