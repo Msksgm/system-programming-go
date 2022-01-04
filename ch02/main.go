@@ -1,10 +1,13 @@
 package main
 
 import (
-	"os"
+	"bytes"
+	"fmt"
 )
 
 // インタフェースを定義
 func main() {
-	os.Stdout.Write([]byte("os.Stdout example\n"))
+	var buffer bytes.Buffer
+	buffer.Write([]byte("bytes.Buffer example\n"))
+	fmt.Println(buffer.String())
 }
