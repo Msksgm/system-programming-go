@@ -1,18 +1,19 @@
 package main
 
 import (
-	"compress/gzip"
-	"io"
+	"encoding/csv"
 	"os"
 )
 
 func main() {
-	file, err := os.Create("test.txt.gz")
+	file, err := os.Create("test.csv")
 	if err != nil {
 		panic(err)
 	}
-	writer := gzip.NewWriter(file)
-	writer.Header.Name = "test.txt"
-	io.WriteString(writer, "gzip.Writer.example\n")
-	writer.Close()
+	writer := csv.NewWriter(file)
+	record := []string{"hoge"}
+	if err := writer.Write(record); err != nil {
+		panic(err)
+	}
+	writer.Flush()
 }
