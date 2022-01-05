@@ -1,19 +1,16 @@
 package main
 
-import (
-	"encoding/csv"
-	"os"
-)
+// func handler(w http.ResponseWriter, r *http.Request) {
+// 	w.Header().Set("Content-Encoding", "gzip")
+// 	w.Header().Set("Content-Type", "application/json")
+// 	// json化する元のデータ
+// 	source := map[string]string{
+// 		"Hello": "World",
+// 	}
+// 	writer := io.MultiWriter(source, os.Stdout)
+// }
 
-func main() {
-	file, err := os.Create("test.csv")
-	if err != nil {
-		panic(err)
-	}
-	writer := csv.NewWriter(file)
-	record := []string{"hoge"}
-	if err := writer.Write(record); err != nil {
-		panic(err)
-	}
-	writer.Flush()
-}
+// func main() {
+// 	http.HandleFunc("/", handler)
+// 	http.ListenAndServe(":8080", nil)
+// }
