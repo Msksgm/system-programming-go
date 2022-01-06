@@ -2,16 +2,18 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"io"
-	"os"
+	"io/ioutil"
 )
 
 func main() {
-	header := bytes.NewBufferString("---- HEADER ----\n")
-	content := bytes.NewBufferString("Example of io.MultiReader\n")
-	footer := bytes.NewBufferString("---- FOOTER ----\n")
+	var buffer bytes.Buffer
+	reader := bytes.NewBufferString("Example of io.TeeReader\n")
+	teeReader := io.TeeReader(reader, &buffer)
+	// データを読み捨てる
+	_, _ = ioutil.ReadAll(teeReader)
 
-	reader := io.MultiReader(header, content, footer)
-	// すべてのreaderをつなげた出力が表示
-	io.Copy(os.Stdout, reader)
+	// けどバッファに残ってる
+	fmt.Println(buffer.String())
 }
